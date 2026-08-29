@@ -17,7 +17,10 @@
 
 ### 2. 데이터베이스 마이그레이션 실행
 
-Supabase 대시보드의 **SQL Editor**에서 [`supabase/migrations/0001_init.sql`](supabase/migrations/0001_init.sql)의 내용을 그대로 실행합니다. 테이블, RLS 정책, `contracts` Storage 버킷이 함께 생성됩니다.
+Supabase 대시보드의 **SQL Editor**에서 아래 파일들을 순서대로 실행합니다.
+
+1. [`supabase/migrations/0001_init.sql`](supabase/migrations/0001_init.sql) — 테이블, RLS 정책, `contracts` Storage 버킷 생성
+2. [`supabase/migrations/0002_seed_rooms.sql`](supabase/migrations/0002_seed_rooms.sql) — 건물의 고정 호실(1층 상가, 2층 201~207호, 3층 301~307호, 4층 401·403호) 시드 데이터
 
 ### 3. 관리자 계정 생성
 
