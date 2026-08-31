@@ -13,7 +13,7 @@ import type { PaymentRow } from "../api/queries";
 
 export function PaymentTable({ rows }: { rows: PaymentRow[] }) {
   if (rows.length === 0) {
-    return <p className="text-sm text-muted-foreground">조건에 맞는 내역이 없습니다.</p>;
+    return <p className="text-sm text-muted-foreground">조건에 맞는 내역이 없어요.</p>;
   }
 
   return (

@@ -37,7 +37,7 @@ export function DeleteTenantButton({ tenantId }: { tenantId: string }) {
           <AlertDialogTitle>세입자를 삭제할까요?</AlertDialogTitle>
           <AlertDialogDescription>
             계약 또는 납부 이력이 있는 세입자는 실제로 삭제되지 않고 &quot;퇴거&quot; 상태로
-            비활성화됩니다. 이력이 없는 경우에만 완전히 삭제됩니다.
+            바뀌어요. 이력이 없는 경우에만 완전히 삭제돼요.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -51,7 +51,7 @@ export function DeleteTenantButton({ tenantId }: { tenantId: string }) {
                   toast.error(result.error);
                   return;
                 }
-                toast.success("처리되었습니다.");
+                toast.success("처리했어요.");
                 router.push("/tenants");
               });
             }}

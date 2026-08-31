@@ -28,7 +28,7 @@ export async function createRoom(
   const { error } = await supabase.from("rooms").insert(parsed.data);
   if (error) {
     if (error.code === "23505") {
-      return { ok: false, error: "이미 등록된 호실 번호입니다." };
+      return { ok: false, error: "이미 등록된 호실 번호예요." };
     }
     return { ok: false, error: error.message };
   }
@@ -58,7 +58,7 @@ export async function updateRoom(
     .eq("id", roomId);
   if (error) {
     if (error.code === "23505") {
-      return { ok: false, error: "이미 등록된 호실 번호입니다." };
+      return { ok: false, error: "이미 등록된 호실 번호예요." };
     }
     return { ok: false, error: error.message };
   }
@@ -74,7 +74,7 @@ export async function deleteRoom(roomId: string): Promise<ActionResult> {
   if (hasDependents) {
     return {
       ok: false,
-      error: "이 호실에는 세입자(이력)가 존재합니다. 먼저 세입자를 정리한 뒤 삭제해주세요.",
+      error: "이 호실에는 세입자(이력)가 있어요. 먼저 세입자를 정리한 뒤 삭제해주세요.",
     };
   }
 

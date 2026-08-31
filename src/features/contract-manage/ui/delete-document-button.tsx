@@ -22,7 +22,7 @@ export function DeleteDocumentButton({ documentId }: { documentId: string }) {
             toast.error(result.error);
             return;
           }
-          toast.success("계약서가 삭제되었습니다.");
+          toast.success("계약서를 삭제했어요.");
         });
       }}
     >

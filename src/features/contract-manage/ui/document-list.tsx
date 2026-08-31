@@ -5,7 +5,7 @@ import { getDocumentSignedUrls } from "@/entities/contract/api";
 
 export async function DocumentList({ documents }: { documents: ContractDocument[] }) {
   if (documents.length === 0) {
-    return <p className="text-sm text-muted-foreground">업로드된 계약서가 없습니다.</p>;
+    return <p className="text-sm text-muted-foreground">업로드된 계약서가 없어요.</p>;
   }
 
   const withUrls = await Promise.all(

@@ -13,7 +13,7 @@ export default async function SettingsPage() {
     <div className="max-w-xl space-y-6">
       <div>
         <h1 className="text-2xl font-bold">설정</h1>
-        <p className="text-sm text-muted-foreground">계정 및 시스템 정보를 확인합니다.</p>
+        <p className="text-sm text-muted-foreground">계정 및 시스템 정보를 확인해요.</p>
       </div>
 
       <Card>

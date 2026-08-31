@@ -11,7 +11,7 @@ export function OverdueList({ rows }: { rows: OverdueRow[] }) {
       </CardHeader>
       <CardContent>
         {rows.length === 0 ? (
-          <p className="text-sm text-muted-foreground">미납 세입자가 없습니다.</p>
+          <p className="text-sm text-muted-foreground">미납 세입자가 없어요.</p>
         ) : (
           <ul className="divide-y">
             {rows.map(({ payment, tenant, room, overdueDays }) => (

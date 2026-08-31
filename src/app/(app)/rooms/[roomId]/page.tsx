@@ -95,7 +95,7 @@ export default async function RoomDetailPage({
               )}
             </div>
           ) : (
-            <p className="text-sm text-muted-foreground">현재 공실입니다.</p>
+            <p className="text-sm text-muted-foreground">현재 공실이에요.</p>
           )}
         </CardContent>
       </Card>
@@ -106,7 +106,7 @@ export default async function RoomDetailPage({
         </CardHeader>
         <CardContent>
           {tenantHistory.length === 0 ? (
-            <p className="text-sm text-muted-foreground">이력이 없습니다.</p>
+            <p className="text-sm text-muted-foreground">이력이 없어요.</p>
           ) : (
             <ul className="divide-y text-sm">
               {tenantHistory.map((tenant) => (

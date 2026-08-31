@@ -10,7 +10,7 @@ export function ExpiringList({ rows }: { rows: ExpiringRow[] }) {
       </CardHeader>
       <CardContent>
         {rows.length === 0 ? (
-          <p className="text-sm text-muted-foreground">만료 예정인 계약이 없습니다.</p>
+          <p className="text-sm text-muted-foreground">만료 예정인 계약이 없어요.</p>
         ) : (
           <ul className="divide-y">
             {rows.map(({ contract, tenant, room }) => (

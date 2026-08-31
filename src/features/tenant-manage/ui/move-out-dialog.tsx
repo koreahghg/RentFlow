@@ -48,7 +48,7 @@ export function MoveOutDialog({ tenantId }: { tenantId: string }) {
             <Input id="move_out_date" name="move_out_date" type="date" required />
           </div>
           <p className="text-xs text-muted-foreground">
-            퇴거 처리 시 호실은 공실로 전환되며, 기존 계약과 납부 기록은 그대로 보존됩니다.
+            퇴거 처리하면 호실은 공실로 바뀌고, 기존 계약과 납부 기록은 그대로 남아요.
           </p>
           {state && !state.ok && <p className="text-sm text-destructive">{state.error}</p>}
           <Button type="submit" className="w-full" disabled={pending}>

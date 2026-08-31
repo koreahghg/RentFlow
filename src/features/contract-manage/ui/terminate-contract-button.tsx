@@ -34,7 +34,7 @@ export function TerminateContractButton({ contractId }: { contractId: string }) 
         <AlertDialogHeader>
           <AlertDialogTitle>계약을 종료할까요?</AlertDialogTitle>
           <AlertDialogDescription>
-            계약 상태가 종료로 변경됩니다. 기존 납부 기록은 그대로 보존됩니다.
+            계약 상태가 종료로 바뀌고, 기존 납부 기록은 그대로 남아요.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -48,7 +48,7 @@ export function TerminateContractButton({ contractId }: { contractId: string }) 
                   toast.error(result.error);
                   return;
                 }
-                toast.success("계약이 종료 처리되었습니다.");
+                toast.success("계약을 종료 처리했어요.");
               });
             }}
           >

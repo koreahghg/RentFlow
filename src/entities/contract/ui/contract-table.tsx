@@ -13,7 +13,7 @@ import type { ContractListRow } from "../api/queries";
 
 export function ContractTable({ rows }: { rows: ContractListRow[] }) {
   if (rows.length === 0) {
-    return <p className="text-sm text-muted-foreground">등록된 계약이 없습니다.</p>;
+    return <p className="text-sm text-muted-foreground">등록된 계약이 없어요.</p>;
   }
 
   return (

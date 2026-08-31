@@ -9,7 +9,7 @@ export default async function RoomsPage() {
       <div>
         <h1 className="text-2xl font-bold">호실 관리</h1>
         <p className="text-sm text-muted-foreground">
-          1층부터 4층까지의 모든 호실을 확인하고 관리합니다.
+          1층부터 4층까지의 모든 호실을 확인하고 관리해요.
         </p>
       </div>
 

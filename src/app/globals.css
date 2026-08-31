@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "pretendard/dist/web/static/pretendard.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -8,7 +9,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-mono);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -27,6 +28,11 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -35,86 +41,133 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-primary-weak: var(--primary-weak);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Toss(TDS) 라운드 래더 — 9단계, 화면 방정식이 아니라 고정값 */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
+  --radius-4xl: 32px;
+
+  /* Toss(TDS) elevation — navy-tinted 저채도 그림자, Tailwind 기본 shadow-* 스케일을 대체 */
+  --shadow-sm: 0 1px 2px oklch(0.155 0.060 261 / 0.04), 0 1px 1px oklch(0.155 0.060 261 / 0.04);
+  --shadow-md: 0 1px 2px oklch(0.155 0.060 261 / 0.04), 0 1px 1px oklch(0.155 0.060 261 / 0.04);
+  --shadow-lg: 0 4px 12px oklch(0.155 0.060 261 / 0.06), 0 1px 2px oklch(0.155 0.060 261 / 0.04);
+  --shadow-xl: 0 12px 32px oklch(0.155 0.060 261 / 0.10), 0 2px 6px oklch(0.155 0.060 261 / 0.06);
+  --shadow-2xl: 0 8px 24px oklch(0.155 0.060 261 / 0.16);
+
+  /* Toss(TDS) motion */
+  --ease-toss: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-toss-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {
+  /* Pretendard — Toss Product Sans(TPS)는 자체 라이선스라 재배포 불가, 공식 권장 대체 서체 */
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "SF Pro Text", "SF Pro", "Apple SD Gothic Neo", "Noto Sans KR", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --foreground: oklch(0.234 0.030 254);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.234 0.030 254);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --popover-foreground: oklch(0.234 0.030 254);
+
+  /* fill-brand: blue-500, 화면당 하나의 primary CTA에만 예약 */
+  --primary: oklch(0.624 0.176 254);
+  --primary-foreground: oklch(1 0 0);
+  --primary-weak: oklch(0.965 0.020 250);
+
+  /* fill-secondary: grey-100 */
+  --secondary: oklch(0.957 0.005 247);
+  --secondary-foreground: oklch(0.234 0.030 254);
+
+  /* fill-weak: grey-50, muted-foreground: fg-tertiary(navy-900 @58%) */
+  --muted: oklch(0.978 0.003 247);
+  --muted-foreground: oklch(0.155 0.060 261 / 0.58);
+
+  --accent: oklch(0.957 0.005 247);
+  --accent-foreground: oklch(0.234 0.030 254);
+
+  /* fill-danger: red-500 */
+  --destructive: oklch(0.628 0.218 22);
+  --destructive-foreground: oklch(1 0 0);
+
+  --success: oklch(0.493 0.143 154);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.748 0.183 56);
+  --warning-foreground: oklch(1 0 0);
+
+  /* border-secondary: grey-200 헤어라인 */
+  --border: oklch(0.913 0.008 247);
+  --input: oklch(0.913 0.008 247);
+  --ring: oklch(0.624 0.176 254);
+
+  --chart-1: oklch(0.624 0.176 254);
+  --chart-2: oklch(0.493 0.143 154);
+  --chart-3: oklch(0.748 0.183 56);
+  --chart-4: oklch(0.555 0.022 253);
+  --chart-5: oklch(0.752 0.016 251);
+
+  --radius: 12px;
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.234 0.030 254);
+  --sidebar-primary: oklch(0.624 0.176 254);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.965 0.020 250);
+  --sidebar-accent-foreground: oklch(0.624 0.176 254);
+  --sidebar-border: oklch(0.913 0.008 247);
+  --sidebar-ring: oklch(0.624 0.176 254);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
+  --background: oklch(0.234 0.030 254);
+  --foreground: oklch(0.978 0.003 247);
+  --card: oklch(0.28 0.028 253);
+  --card-foreground: oklch(0.978 0.003 247);
+  --popover: oklch(0.28 0.028 253);
+  --popover-foreground: oklch(0.978 0.003 247);
+  --primary: oklch(0.624 0.176 254);
+  --primary-foreground: oklch(1 0 0);
+  --primary-weak: oklch(0.342 0.030 253);
+  --secondary: oklch(0.342 0.030 253);
+  --secondary-foreground: oklch(0.978 0.003 247);
+  --muted: oklch(0.342 0.030 253);
+  --muted-foreground: oklch(0.752 0.016 251);
+  --accent: oklch(0.342 0.030 253);
+  --accent-foreground: oklch(0.978 0.003 247);
+  --destructive: oklch(0.628 0.218 22);
+  --destructive-foreground: oklch(1 0 0);
+  --success: oklch(0.493 0.143 154);
+  --success-foreground: oklch(1 0 0);
+  --warning: oklch(0.748 0.183 56);
+  --warning-foreground: oklch(1 0 0);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --ring: oklch(0.624 0.176 254);
+  --chart-1: oklch(0.624 0.176 254);
+  --chart-2: oklch(0.493 0.143 154);
+  --chart-3: oklch(0.748 0.183 56);
+  --chart-4: oklch(0.555 0.022 253);
+  --chart-5: oklch(0.752 0.016 251);
+  --sidebar: oklch(0.28 0.028 253);
+  --sidebar-foreground: oklch(0.978 0.003 247);
+  --sidebar-primary: oklch(0.624 0.176 254);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.342 0.030 253);
+  --sidebar-accent-foreground: oklch(0.965 0.020 250);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-ring: oklch(0.624 0.176 254);
 }
 
 @layer base {
@@ -122,7 +175,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground tabular-nums;
   }
   html {
     @apply font-sans;

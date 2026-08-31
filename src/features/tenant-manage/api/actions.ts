@@ -18,7 +18,7 @@ const ALLOWED_DOC_TYPES = new Set([
 const tenantContractSchema = z.object({
   name: z.string().trim().min(1, "이름을 입력해주세요."),
   phone: z.string().trim().min(1, "전화번호를 입력해주세요."),
-  email: z.string().trim().email("이메일 형식이 올바르지 않습니다.").optional().or(z.literal("")),
+  email: z.string().trim().email("이메일 형식이 올바르지 않아요.").optional().or(z.literal("")),
   birth_date: z.string().optional().or(z.literal("")),
   memo: z.string().optional().or(z.literal("")),
   room_id: z.string().uuid("호실을 선택해주세요."),
@@ -38,7 +38,7 @@ async function uploadDocumentIfPresent(
   if (!file || file.size === 0) return null;
 
   if (!ALLOWED_DOC_TYPES.has(file.type)) {
-    return { error: "계약서는 PDF, JPG, JPEG, PNG 파일만 업로드할 수 있습니다." };
+    return { error: "계약서는 PDF, JPG, JPEG, PNG 파일만 업로드할 수 있어요." };
   }
 
   const path = `${contractId}/${Date.now()}-${file.name}`;
@@ -83,7 +83,7 @@ export async function createTenant(
 
   const data = parsed.data;
   if (data.end_date < data.start_date) {
-    return { ok: false, error: "계약 종료일은 시작일 이후여야 합니다." };
+    return { ok: false, error: "계약 종료일은 시작일 이후여야 해요." };
   }
 
   const supabase = await createClient();
@@ -105,7 +105,7 @@ export async function createTenant(
 
   if (tenantError) {
     if (tenantError.code === "23505") {
-      return { ok: false, error: "해당 호실에는 이미 현재 세입자가 등록되어 있습니다." };
+      return { ok: false, error: "해당 호실에는 이미 현재 세입자가 등록되어 있어요." };
     }
     return { ok: false, error: tenantError.message };
   }
@@ -168,7 +168,7 @@ export async function createTenant(
 const tenantEditSchema = z.object({
   name: z.string().trim().min(1, "이름을 입력해주세요."),
   phone: z.string().trim().min(1, "전화번호를 입력해주세요."),
-  email: z.string().trim().email("이메일 형식이 올바르지 않습니다.").optional().or(z.literal("")),
+  email: z.string().trim().email("이메일 형식이 올바르지 않아요.").optional().or(z.literal("")),
   birth_date: z.string().optional().or(z.literal("")),
   memo: z.string().optional().or(z.literal("")),
   room_id: z.string().uuid().optional().or(z.literal("")),
@@ -216,7 +216,7 @@ export async function updateTenant(
 
   if (error) {
     if (error.code === "23505") {
-      return { ok: false, error: "해당 호실에는 이미 현재 세입자가 등록되어 있습니다." };
+      return { ok: false, error: "해당 호실에는 이미 현재 세입자가 등록되어 있어요." };
     }
     return { ok: false, error: error.message };
   }

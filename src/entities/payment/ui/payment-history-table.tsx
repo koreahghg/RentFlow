@@ -14,7 +14,7 @@ import type { Payment } from "../model/types";
 
 export function PaymentHistoryTable({ payments }: { payments: Payment[] }) {
   if (payments.length === 0) {
-    return <p className="text-sm text-muted-foreground">납부 내역이 없습니다.</p>;
+    return <p className="text-sm text-muted-foreground">납부 내역이 없어요.</p>;
   }
 
   return (

@@ -25,7 +25,7 @@ const PAYMENT_LABEL: Record<string, string> = {
 
 export function TenantTable({ rows }: { rows: TenantListRow[] }) {
   if (rows.length === 0) {
-    return <p className="text-sm text-muted-foreground">조건에 맞는 세입자가 없습니다.</p>;
+    return <p className="text-sm text-muted-foreground">조건에 맞는 세입자가 없어요.</p>;
   }
 
   return (

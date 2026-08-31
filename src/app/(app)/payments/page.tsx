@@ -27,7 +27,7 @@ export default async function PaymentsPage({
       <div>
         <h1 className="text-2xl font-bold">월세 관리</h1>
         <p className="text-sm text-muted-foreground">
-          전체 월세 납부 내역을 조회하고 처리합니다.
+          전체 월세 납부 내역을 조회하고 처리해요.
         </p>
       </div>
 

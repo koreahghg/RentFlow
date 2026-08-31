@@ -23,7 +23,7 @@ export async function uploadContractDocument(
     return { ok: false, error: "파일을 선택해주세요." };
   }
   if (!ALLOWED_DOC_TYPES.has(file.type)) {
-    return { ok: false, error: "PDF, JPG, JPEG, PNG 파일만 업로드할 수 있습니다." };
+    return { ok: false, error: "PDF, JPG, JPEG, PNG 파일만 업로드할 수 있어요." };
   }
 
   const supabase = await createClient();
@@ -95,7 +95,7 @@ export async function updateContract(
     return { ok: false, error: parsed.error.issues[0]?.message ?? "입력값을 확인해주세요." };
   }
   if (parsed.data.end_date < parsed.data.start_date) {
-    return { ok: false, error: "계약 종료일은 시작일 이후여야 합니다." };
+    return { ok: false, error: "계약 종료일은 시작일 이후여야 해요." };
   }
 
   const supabase = await createClient();

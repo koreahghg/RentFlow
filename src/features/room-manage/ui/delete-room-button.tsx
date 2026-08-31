@@ -42,7 +42,7 @@ export function DeleteRoomButton({
         <AlertDialogHeader>
           <AlertDialogTitle>호실을 삭제할까요?</AlertDialogTitle>
           <AlertDialogDescription>
-            이 작업은 되돌릴 수 없습니다. 세입자 또는 계약 이력이 있는 호실은 삭제할 수 없습니다.
+            이 작업은 되돌릴 수 없어요. 세입자 또는 계약 이력이 있는 호실은 삭제할 수 없어요.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -56,7 +56,7 @@ export function DeleteRoomButton({
                   toast.error(result.error);
                   return;
                 }
-                toast.success("호실이 삭제되었습니다.");
+                toast.success("호실을 삭제했어요.");
                 if (redirectTo) router.push(redirectTo);
               });
             }}

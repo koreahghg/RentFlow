@@ -37,7 +37,7 @@ export default async function TenantsPage({
         <div>
           <h1 className="text-2xl font-bold">세입자 관리</h1>
           <p className="text-sm text-muted-foreground">
-            등록된 세입자를 검색하고 관리합니다.
+            등록된 세입자를 검색하고 관리해요.
           </p>
         </div>
         <Button

@@ -140,7 +140,7 @@ export default async function TenantDetailPage({
           <PaymentHistoryTable payments={recentPayments} />
           {payments.length > recentPayments.length && (
             <p className="mt-2 text-xs text-muted-foreground">
-              최근 {recentPayments.length}건만 표시됩니다. 전체 내역은 월세 관리에서 확인하세요.
+              최근 {recentPayments.length}건만 보여드려요. 전체 내역은 월세 관리에서 확인해요.
             </p>
           )}
         </CardContent>

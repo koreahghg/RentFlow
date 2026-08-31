@@ -19,7 +19,7 @@ export function FloorGrid({ rooms }: { rooms: RoomWithStatus[] }) {
               {floor}층
             </h3>
             {floorRooms.length === 0 ? (
-              <p className="text-sm text-muted-foreground">등록된 호실이 없습니다.</p>
+              <p className="text-sm text-muted-foreground">등록된 호실이 없어요.</p>
             ) : (
               <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8">
                 {floorRooms.map((room) => (
