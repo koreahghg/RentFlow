@@ -24,28 +24,40 @@ export default async function DashboardPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-        <StatCard label="전체 호실 수" value={`${stats.totalRooms}개`} icon={Building2} />
-        <StatCard label="입주 호실 수" value={`${stats.occupiedRooms}개`} icon={DoorClosed} />
-        <StatCard label="공실 수" value={`${stats.vacantRooms}개`} icon={DoorOpen} />
-        <StatCard label="전체 세입자 수" value={`${stats.totalTenants}명`} icon={Users} />
-        <StatCard
-          label="이번 달 월세 수입"
-          value={formatCurrency(stats.monthlyIncome)}
-          icon={Banknote}
-        />
-        <StatCard
-          label="이번 달 미납 건수"
-          value={`${stats.overdueCount}건`}
-          icon={AlertTriangle}
-          tone={stats.overdueCount > 0 ? "danger" : "default"}
-        />
-        <StatCard
-          label="이번 달 미납 금액"
-          value={formatCurrency(stats.overdueAmount)}
-          icon={Wallet}
-          tone={stats.overdueAmount > 0 ? "danger" : "default"}
-        />
+      <div className="space-y-3">
+        <h2 className="text-sm font-semibold text-muted-foreground">이번 달 자금 현황</h2>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <StatCard
+            label="이번 달 월세 수입"
+            value={formatCurrency(stats.monthlyIncome)}
+            icon={Banknote}
+            size="lg"
+          />
+          <StatCard
+            label="이번 달 미납 건수"
+            value={`${stats.overdueCount}건`}
+            icon={AlertTriangle}
+            tone={stats.overdueCount > 0 ? "danger" : "default"}
+            size="lg"
+          />
+          <StatCard
+            label="이번 달 미납 금액"
+            value={formatCurrency(stats.overdueAmount)}
+            icon={Wallet}
+            tone={stats.overdueAmount > 0 ? "danger" : "default"}
+            size="lg"
+          />
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <h2 className="text-sm font-semibold text-muted-foreground">건물 현황</h2>
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+          <StatCard label="전체 호실 수" value={`${stats.totalRooms}개`} icon={Building2} />
+          <StatCard label="입주 호실 수" value={`${stats.occupiedRooms}개`} icon={DoorClosed} />
+          <StatCard label="공실 수" value={`${stats.vacantRooms}개`} icon={DoorOpen} />
+          <StatCard label="전체 세입자 수" value={`${stats.totalTenants}명`} icon={Users} />
+        </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">

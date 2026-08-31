@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
@@ -9,12 +9,24 @@ import { markPaymentPaid, type ActionResult } from "../api/actions";
 import { todayISO } from "@/shared/lib/date";
 import type { Payment } from "@/entities/payment";
 
-export function PayForm({ payment }: { payment: Payment }) {
+export function PayForm({
+  payment,
+  onSuccess,
+}: {
+  payment: Payment;
+  onSuccess?: () => void;
+}) {
   const action = markPaymentPaid.bind(null, payment.id);
   const [state, formAction, pending] = useActionState<ActionResult | null, FormData>(
     action,
     null,
   );
+
+  const [prevState, setPrevState] = useState(state);
+  if (state !== prevState) {
+    setPrevState(state);
+    if (state?.ok) onSuccess?.();
+  }
 
   return (
     <form action={formAction} className="space-y-4">

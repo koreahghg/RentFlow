@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { formatCurrency } from "@/shared/lib/format";
+import { QuickPayDialog } from "@/features/payment-manage";
 import type { OverdueRow } from "../api/queries";
 
 export function OverdueList({ rows }: { rows: OverdueRow[] }) {
@@ -15,25 +16,26 @@ export function OverdueList({ rows }: { rows: OverdueRow[] }) {
         ) : (
           <ul className="divide-y">
             {rows.map(({ payment, tenant, room, overdueDays }) => (
-              <li key={payment.id}>
+              <li key={payment.id} className="flex items-center justify-between gap-3 py-3">
                 <Link
                   href={`/tenants/${tenant.id}`}
-                  className="flex items-center justify-between gap-3 py-3 text-sm hover:bg-muted/50 -mx-2 px-2 rounded-md"
+                  className="min-w-0 flex-1 -mx-2 rounded-md px-2 py-1 text-sm hover:bg-muted/50"
                 >
-                  <div className="min-w-0">
-                    <p className="font-medium">
-                      {room.room_number}호 · {tenant.name}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      납부예정일 {payment.due_date} · 연체 {overdueDays}일
-                    </p>
-                  </div>
-                  <div className="shrink-0 text-right">
-                    <p className="font-semibold text-destructive">
+                  <p className="font-medium">
+                    {room.room_number}호 · {tenant.name}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    납부예정일 {payment.due_date} · 연체 {overdueDays}일 ·{" "}
+                    <span className="font-semibold text-destructive">
                       {formatCurrency(payment.total_amount)}
-                    </p>
-                  </div>
+                    </span>
+                  </p>
                 </Link>
+                <QuickPayDialog
+                  payment={payment}
+                  roomLabel={`${room.room_number}호`}
+                  tenantName={tenant.name}
+                />
               </li>
             ))}
           </ul>

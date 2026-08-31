@@ -1,5 +1,5 @@
 import { MonthlySummaryCard } from "@/widgets/payments-summary";
-import { PaymentFilterBar } from "@/features/payment-manage";
+import { PaymentFilterBar, QuickPayDialog } from "@/features/payment-manage";
 import { PaymentTable } from "@/entities/payment";
 import { getMonthlySummary, listPayments, type PaymentFilters } from "@/entities/payment/api";
 
@@ -33,7 +33,18 @@ export default async function PaymentsPage({
 
       <MonthlySummaryCard summary={summary} />
       <PaymentFilterBar />
-      <PaymentTable rows={rows} />
+      <PaymentTable
+        rows={rows}
+        actionSlot={(row) =>
+          row.displayStatus !== "PAID" ? (
+            <QuickPayDialog
+              payment={row.payment}
+              roomLabel={row.room ? `${row.room.room_number}호` : "-"}
+              tenantName={row.tenant?.name ?? "-"}
+            />
+          ) : null
+        }
+      />
     </div>
   );
 }

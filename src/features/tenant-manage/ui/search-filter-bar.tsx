@@ -40,9 +40,18 @@ export function SearchFilterBar() {
   const [search, setSearch] = useState(searchParams.get("search") ?? "");
   const [, startTransition] = useTransition();
 
-  function updateParam(key: string, value: string | null) {
+  function updateParam(key: string, value: string | null, opts?: { keepAll?: boolean }) {
     const params = new URLSearchParams(searchParams.toString());
-    if (!value || value === "all") {
+
+    // 다른 필터를 바꾸는 동안에도 아직 커밋되지 않은 검색어(입력 중이지만
+    // blur/Enter 전)가 함께 유지되도록, 매번 현재 검색어를 먼저 반영한다.
+    if (search) {
+      params.set("search", search);
+    } else {
+      params.delete("search");
+    }
+
+    if (!value || (value === "all" && !opts?.keepAll)) {
       params.delete(key);
     } else {
       params.set(key, value);
@@ -86,8 +95,8 @@ export function SearchFilterBar() {
       </Select>
 
       <Select
-        defaultValue={searchParams.get("resident") ?? "all"}
-        onValueChange={(v) => updateParam("resident", v)}
+        defaultValue={searchParams.get("resident") ?? "active"}
+        onValueChange={(v) => updateParam("resident", v, { keepAll: true })}
       >
         <SelectTrigger className="sm:w-32">
           <SelectValue placeholder="거주 상태" />

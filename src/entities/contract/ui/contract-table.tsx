@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/ui/table";
+import { TableRowLink } from "@/shared/ui/table-row-link";
 import { ContractStatusBadge } from "./contract-status-badge";
 import { formatCurrency } from "@/shared/lib/format";
 import type { ContractListRow } from "../api/queries";
@@ -18,7 +19,7 @@ export function ContractTable({ rows }: { rows: ContractListRow[] }) {
 
   return (
     <>
-      <div className="hidden overflow-x-auto rounded-lg border md:block">
+      <div className="hidden overflow-x-auto rounded-xl border border-border md:block">
         <Table>
           <TableHeader>
             <TableRow>
@@ -31,24 +32,21 @@ export function ContractTable({ rows }: { rows: ContractListRow[] }) {
           </TableHeader>
           <TableBody>
             {rows.map(({ contract, tenant, room, displayStatus }) => (
-              <TableRow key={contract.id}>
-                <TableCell colSpan={5} className="p-0">
-                  <Link
-                    href={`/contracts/${contract.id}`}
-                    className="grid grid-cols-5 items-center px-4 py-2.5 hover:bg-muted/50"
-                  >
-                    <span>{room ? `${room.room_number}호` : "-"}</span>
-                    <span>{tenant?.name ?? "-"}</span>
-                    <span>{formatCurrency(contract.monthly_rent)}</span>
-                    <span>
-                      {contract.start_date} ~ {contract.end_date}
-                    </span>
-                    <span>
-                      <ContractStatusBadge status={displayStatus} />
-                    </span>
-                  </Link>
+              <TableRowLink key={contract.id} href={`/contracts/${contract.id}`}>
+                <TableCell className="font-medium">
+                  {room ? `${room.room_number}호` : "-"}
                 </TableCell>
-              </TableRow>
+                <TableCell>{tenant?.name ?? "-"}</TableCell>
+                <TableCell className="font-medium">
+                  {formatCurrency(contract.monthly_rent)}
+                </TableCell>
+                <TableCell className="text-muted-foreground">
+                  {contract.start_date} ~ {contract.end_date}
+                </TableCell>
+                <TableCell>
+                  <ContractStatusBadge status={displayStatus} />
+                </TableCell>
+              </TableRowLink>
             ))}
           </TableBody>
         </Table>
@@ -59,7 +57,7 @@ export function ContractTable({ rows }: { rows: ContractListRow[] }) {
           <Link
             key={contract.id}
             href={`/contracts/${contract.id}`}
-            className="block rounded-lg border p-3"
+            className="block rounded-xl border border-border p-4 transition-colors active:bg-muted/50"
           >
             <div className="flex items-center justify-between">
               <span className="font-medium">

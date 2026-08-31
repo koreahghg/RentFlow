@@ -60,6 +60,19 @@ export async function listPayments(filters: PaymentFilters = {}): Promise<Paymen
     rows = rows.filter((r) => r.displayStatus === filters.status);
   }
 
+  // 처리해야 할 것(연체·미납)을 마감일이 이른 순으로 맨 위에 올리고,
+  // 이미 끝난 것(납부완료)은 최근 순으로 그 아래에 둔다. 연/월 역순 정렬만 쓰면
+  // 아직 도래하지 않은 먼 미래의 예정 건이 맨 위를 차지해 정작 지금 처리할
+  // 건을 스크롤해서 찾아야 했던 문제를 해결한다.
+  rows.sort((a, b) => {
+    const aDone = a.displayStatus === "PAID";
+    const bDone = b.displayStatus === "PAID";
+    if (aDone !== bDone) return aDone ? 1 : -1;
+    return aDone
+      ? b.payment.due_date.localeCompare(a.payment.due_date)
+      : a.payment.due_date.localeCompare(b.payment.due_date);
+  });
+
   return rows;
 }
 

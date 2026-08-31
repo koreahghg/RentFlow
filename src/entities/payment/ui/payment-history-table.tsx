@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/ui/table";
+import { TableRowLink } from "@/shared/ui/table-row-link";
 import { PaymentStatusBadge } from "./payment-status-badge";
 import { formatCurrency } from "@/shared/lib/format";
 import { getPaymentDisplayStatus } from "../model/lib";
@@ -19,7 +20,7 @@ export function PaymentHistoryTable({ payments }: { payments: Payment[] }) {
 
   return (
     <>
-      <div className="hidden overflow-x-auto rounded-lg border md:block">
+      <div className="hidden overflow-x-auto rounded-xl border border-border md:block">
         <Table>
           <TableHeader>
             <TableRow>
@@ -34,26 +35,23 @@ export function PaymentHistoryTable({ payments }: { payments: Payment[] }) {
           </TableHeader>
           <TableBody>
             {payments.map((payment) => (
-              <TableRow key={payment.id}>
-                <TableCell colSpan={7} className="p-0">
-                  <Link
-                    href={`/payments/${payment.id}`}
-                    className="grid grid-cols-7 items-center px-4 py-2.5 hover:bg-muted/50"
-                  >
-                    <span>
-                      {payment.year}년 {payment.month}월
-                    </span>
-                    <span>{payment.due_date}</span>
-                    <span>{formatCurrency(payment.monthly_rent)}</span>
-                    <span>{formatCurrency(payment.maintenance_fee)}</span>
-                    <span>{formatCurrency(payment.total_amount)}</span>
-                    <span>{payment.paid_date ?? "-"}</span>
-                    <span>
-                      <PaymentStatusBadge status={getPaymentDisplayStatus(payment)} />
-                    </span>
-                  </Link>
+              <TableRowLink key={payment.id} href={`/payments/${payment.id}`}>
+                <TableCell>
+                  {payment.year}년 {payment.month}월
                 </TableCell>
-              </TableRow>
+                <TableCell className="text-muted-foreground">{payment.due_date}</TableCell>
+                <TableCell>{formatCurrency(payment.monthly_rent)}</TableCell>
+                <TableCell>{formatCurrency(payment.maintenance_fee)}</TableCell>
+                <TableCell className="font-medium">
+                  {formatCurrency(payment.total_amount)}
+                </TableCell>
+                <TableCell className="text-muted-foreground">
+                  {payment.paid_date ?? "-"}
+                </TableCell>
+                <TableCell>
+                  <PaymentStatusBadge status={getPaymentDisplayStatus(payment)} />
+                </TableCell>
+              </TableRowLink>
             ))}
           </TableBody>
         </Table>
@@ -64,7 +62,7 @@ export function PaymentHistoryTable({ payments }: { payments: Payment[] }) {
           <Link
             key={payment.id}
             href={`/payments/${payment.id}`}
-            className="block rounded-lg border p-3"
+            className="block rounded-xl border border-border p-4 transition-colors active:bg-muted/50"
           >
             <div className="flex items-center justify-between">
               <span className="font-medium">

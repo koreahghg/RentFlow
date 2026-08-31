@@ -1,7 +1,6 @@
 "use client";
 
 import { useActionState } from "react";
-import { Building2 } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
@@ -15,16 +14,11 @@ export default function LoginPage() {
   );
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-muted/30 p-4">
-      <Card className="w-full max-w-sm">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center gap-6 bg-muted/30 p-4">
+      <h1 className="text-center text-[32px] font-bold">관리자 로그인</h1>
+      <Card className="w-full max-w-sm border-none">
         <CardHeader className="items-center text-center">
-          <div className="mb-2 flex items-center gap-2">
-            <Building2 className="size-6" />
-            <span className="text-xl font-semibold">RentFlow</span>
-          </div>
-          <CardTitle className="text-base font-normal text-muted-foreground">
-            관리자 로그인
-          </CardTitle>
+          <CardTitle className="text-xl font-semibold">RentFlow</CardTitle>
         </CardHeader>
         <CardContent>
           <form action={formAction} className="space-y-4">

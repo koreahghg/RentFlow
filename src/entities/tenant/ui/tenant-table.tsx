@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/ui/table";
+import { TableRowLink } from "@/shared/ui/table-row-link";
 import { Badge } from "@/shared/ui/badge";
 import { formatCurrency } from "@/shared/lib/format";
 import type { TenantListRow } from "../api/queries";
@@ -30,7 +31,7 @@ export function TenantTable({ rows }: { rows: TenantListRow[] }) {
 
   return (
     <>
-      <div className="hidden overflow-x-auto rounded-lg border md:block">
+      <div className="hidden overflow-x-auto rounded-xl border border-border md:block">
         <Table>
           <TableHeader>
             <TableRow>
@@ -45,30 +46,34 @@ export function TenantTable({ rows }: { rows: TenantListRow[] }) {
           </TableHeader>
           <TableBody>
             {rows.map(({ tenant, room, contract, paymentStatus }) => (
-              <TableRow key={tenant.id} className="cursor-pointer">
-                <TableCell colSpan={7} className="p-0">
-                  <Link
-                    href={`/tenants/${tenant.id}`}
-                    className="grid grid-cols-7 items-center px-4 py-3 hover:bg-muted/50"
-                  >
-                    <span>{room ? `${room.room_number}호` : "-"}</span>
-                    <span className="font-medium">{tenant.name}</span>
-                    <span>{tenant.phone}</span>
-                    <span>{tenant.move_in_date}</span>
-                    <span>{contract?.end_date ?? "-"}</span>
-                    <span>{contract ? formatCurrency(contract.monthly_rent) : "-"}</span>
-                    <span>
-                      {paymentStatus ? (
-                        <Badge variant="outline" className={PAYMENT_BADGE[paymentStatus]}>
-                          {PAYMENT_LABEL[paymentStatus]}
-                        </Badge>
-                      ) : (
-                        "-"
-                      )}
-                    </span>
-                  </Link>
+              <TableRowLink key={tenant.id} href={`/tenants/${tenant.id}`}>
+                <TableCell>{room ? `${room.room_number}호` : "-"}</TableCell>
+                <TableCell className="font-medium">
+                  <span className="inline-flex items-center gap-1.5">
+                    {tenant.name}
+                    {tenant.status === "moved_out" && (
+                      <Badge variant="outline" className="bg-muted text-muted-foreground border-border">
+                        퇴거
+                      </Badge>
+                    )}
+                  </span>
                 </TableCell>
-              </TableRow>
+                <TableCell className="text-muted-foreground">{tenant.phone}</TableCell>
+                <TableCell className="text-muted-foreground">{tenant.move_in_date}</TableCell>
+                <TableCell className="text-muted-foreground">{contract?.end_date ?? "-"}</TableCell>
+                <TableCell className="font-medium">
+                  {contract ? formatCurrency(contract.monthly_rent) : "-"}
+                </TableCell>
+                <TableCell>
+                  {paymentStatus ? (
+                    <Badge variant="outline" className={PAYMENT_BADGE[paymentStatus]}>
+                      {PAYMENT_LABEL[paymentStatus]}
+                    </Badge>
+                  ) : (
+                    <span className="text-muted-foreground">-</span>
+                  )}
+                </TableCell>
+              </TableRowLink>
             ))}
           </TableBody>
         </Table>
@@ -79,10 +84,17 @@ export function TenantTable({ rows }: { rows: TenantListRow[] }) {
           <Link
             key={tenant.id}
             href={`/tenants/${tenant.id}`}
-            className="block rounded-lg border p-4"
+            className="block rounded-xl border border-border p-4 transition-colors active:bg-muted/50"
           >
             <div className="flex items-center justify-between">
-              <span className="font-semibold">{tenant.name}</span>
+              <span className="inline-flex items-center gap-1.5 font-semibold">
+                {tenant.name}
+                {tenant.status === "moved_out" && (
+                  <Badge variant="outline" className="bg-muted text-muted-foreground border-border">
+                    퇴거
+                  </Badge>
+                )}
+              </span>
               {paymentStatus && (
                 <Badge variant="outline" className={PAYMENT_BADGE[paymentStatus]}>
                   {PAYMENT_LABEL[paymentStatus]}

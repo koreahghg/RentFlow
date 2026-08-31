@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, DoorClosed } from "lucide-react";
 import { listVacantRooms } from "@/entities/tenant/api";
 import { TenantForm } from "@/features/tenant-manage";
+import { Card, CardContent } from "@/shared/ui/card";
 
 export default async function NewTenantPage() {
   const rooms = await listVacantRooms();
@@ -22,7 +23,30 @@ export default async function NewTenantPage() {
         </p>
       </div>
 
-      <TenantForm rooms={rooms} />
+      {rooms.length === 0 ? (
+        <Card>
+          <CardContent className="flex flex-col items-center gap-3 py-10 text-center">
+            <div className="flex size-11 items-center justify-center rounded-full bg-muted text-muted-foreground">
+              <DoorClosed className="size-5" />
+            </div>
+            <div>
+              <p className="font-medium">지금은 빈 호실이 없어요.</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                세입자를 등록하려면 먼저 호실이 공실이어야 해요. 퇴거 처리가 필요하면
+                호실 관리에서 확인해주세요.
+              </p>
+            </div>
+            <Link
+              href="/rooms"
+              className="mt-1 text-sm font-medium text-primary hover:underline"
+            >
+              호실 관리로 이동
+            </Link>
+          </CardContent>
+        </Card>
+      ) : (
+        <TenantForm rooms={rooms} />
+      )}
     </div>
   );
 }
